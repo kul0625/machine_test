@@ -1,0 +1,12 @@
+<div class="container mt-5" style="max-width: 520px">
+  <div class="card p-4 shadow-sm">
+    <h4>Login</h4>
+    <input class="form-control my-2" placeholder="Username" [(ngModel)]="username" />
+    <input class="form-control my-2" placeholder="Password" type="password" [(ngModel)]="password" />
+    <label class="small text-muted">CAPTCHA: {{ captchaQuestion }}</label>
+    <input class="form-control my-2" placeholder="Captcha answer" [(ngModel)]="captchaAnswer" />
+    <button class="btn btn-primary" (click)="login()">Login</button>
+    <button class="btn btn-link" (click)="reloadCaptcha()">Refresh Captcha</button>
+    <p class="text-danger mt-2" *ngIf="error">{{ error }}</p>
+  </div>
+</div>
