@@ -1,0 +1,14 @@
+{
+  "info": {
+    "name": "Hierarchy Wallet APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {"name":"Get CAPTCHA","request":{"method":"GET","url":"{{baseUrl}}/api/auth/captcha"}},
+    {"name":"Login","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"username\": \"owner\",\n  \"password\": \"Owner@123\",\n  \"captchaAnswer\": \"5\"\n}"},"url":"{{baseUrl}}/api/auth/login"}},
+    {"name":"Create Next-Level User","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"name\": \"Agent 1\",\n  \"username\": \"agent1\",\n  \"password\": \"Agent@123\",\n  \"role\": \"ADMIN\"\n}"},"url":"{{baseUrl}}/api/auth/register"}},
+    {"name":"Transfer Balance","request":{"method":"POST","header":[{"key":"Content-Type","value":"application/json"}],"body":{"mode":"raw","raw":"{\n  \"receiverId\": \"<user_id>\",\n  \"amount\": 100\n}"},"url":"{{baseUrl}}/api/balance/transfer"}},
+    {"name":"Statement","request":{"method":"GET","url":"{{baseUrl}}/api/balance/statement"}}
+  ],
+  "variable": [{"key":"baseUrl","value":"http://localhost:4000"}]
+}
