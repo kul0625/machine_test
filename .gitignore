@@ -1,0 +1,7 @@
+node_modules/
+backend-repo/node_modules/
+frontend-repo/node_modules/
+frontend-repo/dist/
+backend-repo/.env
+
+frontend-repo/.angular/
