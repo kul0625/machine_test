@@ -1,0 +1,25 @@
+.hierarchy-node {
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.user-card {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
+}
+
+.children {
+  margin-left: 20px;
+}
+.arrow {
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 6px;
+  transition: transform 0.2s ease;
+}
+
+.arrow.open {
+  transform: rotate(90deg);
+}

@@ -1,5 +1,4 @@
 <div class="container py-4">
-
   <div class="d-flex justify-content-between align-items-center">
     <h3>Dashboard</h3>
 
@@ -11,7 +10,6 @@
   <!-- User Card -->
   <div class="card mt-3 shadow-sm">
     <div class="card-body">
-
       <p class="mb-1">
         <strong>User:</strong>
         {{ auth.user?.name }} ({{ auth.user?.role }})
@@ -19,7 +17,7 @@
 
       <p class="mb-0">
         <strong>Commission Earned:</strong>
-        ₹{{ auth.user?.commissionEarned }}
+        ₹{{ auth.user?.commissionEarned | number: "1.2-2" }}
       </p>
       <p class="mb-0">
         <strong>Balance:</strong>
@@ -27,33 +25,31 @@
       </p>
 
       <div class="d-flex align-items-center gap-2 mt-3 flex-wrap">
-
-        <a routerLink="users" class="btn btn-sm btn-primary">
-          Manage Users
-        </a>
+        <a routerLink="users" class="btn btn-sm btn-primary"> Manage Users </a>
         <div class="d-flex" *ngIf="auth.user?.role === 'OWNER'">
-
-          <input type="number" class="form-control form-control-sm" placeholder="Recharge Amount" min="0"
-            style="max-width:150px; margin-right: 5px;" [(ngModel)]="rechargeAmount" />
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            placeholder="Recharge Amount"
+            min="0"
+            style="max-width: 150px; margin-right: 5px"
+            [(ngModel)]="rechargeAmount"
+          />
 
           <button class="btn btn-sm btn-success" (click)="addRecharge()">
             Add Balance
           </button>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- Statement -->
-  <div class="card mt-3 shadow-sm">
+  <div class="card mt-3 shadow-sm" *ngIf="auth.user?.role !== 'ADMIN'">
     <div class="card-body">
-
       <h5>Statement</h5>
 
-      <div *ngIf="loading" class="text-muted">
-        Loading transactions...
-      </div>
+      <div *ngIf="loading" class="text-muted">Loading transactions...</div>
 
       <div *ngIf="error" class="text-danger">
         {{ error }}
@@ -71,13 +67,12 @@
         </thead>
 
         <tbody>
-
           <tr *ngFor="let i of statement">
             <td>{{ i.type }}</td>
             <td>₹{{ i.amount }}</td>
-            <td>{{ i.senderId?.username || '-' }}</td>
-            <td>{{ i.receiverId?.username || '-' }}</td>
-            <td>{{ i.createdAt | date:'medium' }}</td>
+            <td>{{ i.senderId?.username || "-" }}</td>
+            <td>{{ i.receiverId?.username || "-" }}</td>
+            <td>{{ i.createdAt | date: "medium" }}</td>
           </tr>
 
           <tr *ngIf="statement.length === 0">
@@ -85,13 +80,10 @@
               No transactions found
             </td>
           </tr>
-
         </tbody>
       </table>
-
     </div>
   </div>
 
   <router-outlet></router-outlet>
-
 </div>

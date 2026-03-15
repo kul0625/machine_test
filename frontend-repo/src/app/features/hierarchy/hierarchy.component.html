@@ -1,0 +1,12 @@
+<div *ngIf="user" class="node">
+  <div class="user-card" (click)="toggleChildren()">
+    <span class="arrow" [class.open]="showChildren">▶</span>
+    <strong>{{ user.name }}</strong>
+    ({{ user.username }}) | Level {{ user.level }} | ₹{{ user.balance }}
+  </div>
+
+  <div class="children" *ngIf="user.children?.length && showChildren">
+    <app-hierarchy *ngFor="let child of user.children" [user]="child">
+    </app-hierarchy>
+  </div>
+</div>
