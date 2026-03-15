@@ -7,10 +7,20 @@
 - Transfer balance to next-level users
 - Route guard for protected pages
 
-## Run
+## Run (local)
 ```bash
 npm install
 npm start
 ```
 
 Backend expected at `http://localhost:4000`.
+
+## Run with Docker
+From workspace root:
+
+```bash
+docker compose up --build
+```
+
+Frontend will be available on `http://localhost:4200`.
+frontend-repo/angular.js

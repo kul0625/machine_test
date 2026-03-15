@@ -1,0 +1,19 @@
+.card {
+  border-radius: 10px;
+}
+
+table {
+  font-size: 14px;
+}
+
+h5 {
+  font-weight: 600;
+}
+.back-link {
+  cursor: pointer;
+  color: #0d6efd;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}

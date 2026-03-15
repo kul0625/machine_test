@@ -3,13 +3,61 @@
 ## Stack
 Node.js, Express, MongoDB, JWT (HTTP-only cookies), express-session CAPTCHA, Socket.IO.
 
-## Run
+## Run (local)
 ```bash
 npm install
 cp .env.example .env
 npm run seed:owner
 npm run dev
 ```
+
+## Run with Docker
+From the workspace root:
+
+```bash
+docker compose up --build
+```
+
+Backend runs at `http://localhost:4000` and automatically seeds owner user on startup if missing.
+
+## MongoDB connection (if URI is not working)
+Set `MONGO_URI` in `.env`.
+
+### Option A: Local MongoDB service
+Use:
+```env
+MONGO_URI=mongodb://127.0.0.1:27017/hierarchy_wallet
+```
+Then start MongoDB locally (`mongod`) and run backend.
+
+### Option B: Docker MongoDB (recommended if local install is difficult)
+```bash
+docker run -d --name hierarchy-mongo -p 27017:27017 mongo:7
+```
+Then keep:
+```env
+MONGO_URI=mongodb://127.0.0.1:27017/hierarchy_wallet
+```
+
+### Option C: MongoDB Atlas
+Use a URI like:
+```env
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/hierarchy_wallet?retryWrites=true&w=majority
+```
+Important checks:
+- URL-encode special characters in password (`@`, `#`, `%`, etc.).
+- In Atlas Network Access, add your machine IP (or temporary `0.0.0.0/0` for testing).
+- In Atlas Database Access, ensure user has read/write permission.
+
+### Quick diagnostics
+```bash
+# verify env value is loaded
+echo $MONGO_URI
+
+# test DNS for Atlas host (replace host)
+nslookup <cluster-url>
+```
+If backend prints `MongoDB connected`, URI is valid.
 
 ## Core APIs
 - `GET /api/auth/captcha`
