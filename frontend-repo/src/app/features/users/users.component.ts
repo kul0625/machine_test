@@ -99,11 +99,6 @@ export class UsersComponent implements OnInit {
       return;
     }
 
-    if (this.newPassword.length < 6) {
-      this.editError = "Password must be at least 6 characters.";
-      return;
-    }
-
     if (this.newPassword !== this.confirmPassword) {
       this.editError = "Passwords do not match.";
       return;
