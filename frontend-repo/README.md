@@ -26,4 +26,5 @@ docker compose up --build
 ```
 
 Frontend will be available on `http://localhost:4200`.
-frontend-repo/angular.js
+
+Docker builder image uses `node:22.18.0-alpine`.

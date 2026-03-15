@@ -32,21 +32,40 @@ npm start
 ```
 
 ## Dockerized setup (recommended)
-Run the full stack with one command:
 
+### (A) If you use your own MongoDB (Atlas/external)
+Create a root `.env` file and set your URI:
+
+```env
+MONGO_URI=mongodb+srv://chandel:chandels@cluster0.gizrixl.mongodb.net/hierarchy_wallet?retryWrites=true&w=majority
+JWT_SECRET=replace_with_long_secret
+SESSION_SECRET=replace_with_session_secret
+CLIENT_URL=http://localhost:4200
+```
+
+Then run:
 ```bash
 docker compose up --build
 ```
 
+### (B) If you want local MongoDB in Docker
+Run with the `localdb` profile so Mongo container is started:
+
+```bash
+docker compose --profile localdb up --build
+```
 Services:
 - Frontend: http://localhost:4200
 - Backend API: http://localhost:4000/api
-- MongoDB: `mongodb+srv://chandel:chandels@cluster0.gizrixl.mongodb.net/hierarchy_wallet?retryWrites=true&w=majority`
+- MongoDB (only in `localdb` profile): `localhost:27017`
 
 Useful Docker commands:
 ```bash
 # run in background
 docker compose up -d --build
+
+# run in background with local mongo container
+docker compose --profile localdb up -d --build
 
 # view logs
 docker compose logs -f
@@ -70,3 +89,14 @@ docker compose down -v
 - Postman collection: `backend-repo/docs/postman_collection.json`
 
 ## Implemented highlights
+- JWT auth via HTTP-only cookies
+- Session-linked CAPTCHA with 5-minute expiry
+- N-level hierarchy with parent-child enforcement
+- Balance transfer + ledger statement
+- Admin hierarchy traversal and delegated credit (deduct from immediate parent)
+- Commission tracking field
+- Socket.IO event for live balance updates
+
+## MongoDB help
+If your MongoDB connection string is failing, check `backend-repo/README.md` section 
+**MongoDB connection (if URI is not working)** for local, Docker, and Atlas options.

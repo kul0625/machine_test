@@ -15,16 +15,47 @@ npm run dev
 ## Run with Docker
 From the workspace root:
 
+### If you use your own MongoDB URI (Atlas/external)
+Set `MONGO_URI` in root `.env`:
+
+```env
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/hierarchy_wallet?retryWrites=true&w=majority
+```
+
+Then run:
 ```bash
 docker compose up --build
 ```
 
+### If you want MongoDB container from compose
+```bash
+docker compose --profile localdb up --build
+```
+
 Backend runs at `http://localhost:4000` and automatically seeds owner user on startup if missing.
 
-## MongoDB connection (if URI is not working)
-Set `MONGO_URI` in `.env`.```
+Docker image uses `node:22.18.0-alpine`.
 
-### MongoDB Atlas
+## MongoDB connection (if URI is not working)
+Set `MONGO_URI` in `.env`.
+
+### Option A: Local MongoDB service
+Use:
+```env
+MONGO_URI=mongodb://127.0.0.1:27017/hierarchy_wallet
+```
+Then start MongoDB locally (`mongod`) and run backend.
+
+### Option B: Docker MongoDB (recommended if local install is difficult)
+```bash
+docker run -d --name hierarchy-mongo -p 27017:27017 mongo:7
+```
+Then keep:
+```env
+MONGO_URI=mongodb://127.0.0.1:27017/hierarchy_wallet
+```
+
+### Option C: MongoDB Atlas
 Use a URI like:
 ```env
 MONGO_URI=mongodb+srv://chandel:chandels@cluster0.gizrixl.mongodb.net/hierarchy_wallet?retryWrites=true&w=majority
