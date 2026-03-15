@@ -7,6 +7,9 @@
 - Transfer balance to next-level users
 - Route guard for protected pages
 
+## Prerequisite
+- Node.js `22.18.0` (or any `22.x` >= 22.18.0).
+
 ## Run (local)
 ```bash
 npm install

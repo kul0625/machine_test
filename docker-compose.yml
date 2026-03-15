@@ -1,35 +1,19 @@
 services:
-  mongo:
-    image: mongo:7
-    container_name: hierarchy-mongo
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-    healthcheck:
-      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
   backend:
     build:
       context: ./backend-repo
       dockerfile: Dockerfile
     container_name: hierarchy-backend
     restart: unless-stopped
-    depends_on:
-      mongo:
-        condition: service_healthy
     environment:
       PORT: 4000
-      MONGO_URI: mongodb://mongo:27017/hierarchy_wallet
+      MONGO_URI: mongodb+srv://chandel:chandels@cluster0.gizrixl.mongodb.net/hierarchy_wallet?retryWrites=true&w=majority
       JWT_SECRET: replace_with_long_secret
       JWT_EXPIRES_IN: 1d
       CLIENT_URL: http://localhost:4200
       SESSION_SECRET: replace_with_session_secret
       OWNER_DEFAULT_PASSWORD: Owner@123
+      ADMIN_DEFAULT_PASSWORD: Admin@123
     ports:
       - "4000:4000"
 
@@ -43,6 +27,3 @@ services:
       - backend
     ports:
       - "4200:80"
-
-volumes:
-  mongo_data:

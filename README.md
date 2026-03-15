@@ -11,6 +11,9 @@ This coding environment gives one git repository. To publish as separate GitHub 
 2. Copy `backend-repo/*` to backend repo and `frontend-repo/*` to frontend repo.
 3. Push each independently.
 
+## Prerequisite
+- Node.js `22.18.0` (or any `22.x` >= 22.18.0) for local runs.
+
 ## Quick start (without Docker)
 ### Backend
 ```bash
@@ -58,6 +61,10 @@ docker compose down -v
 ## Default owner credentials
 - username: `owner`
 - password: value of `OWNER_DEFAULT_PASSWORD` in `.env` / compose env (default `Owner@123`)
+
+## Default admin credentials
+- username: `admin`
+- password: value of `ADMIN_DEFAULT_PASSWORD` in `.env` / compose env (default `Admin@123`)
 
 ## API docs
 - Postman collection: `backend-repo/docs/postman_collection.json`
