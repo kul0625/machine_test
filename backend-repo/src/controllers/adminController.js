@@ -3,13 +3,13 @@ const { getDownlineTree, isDescendant } = require('../services/hierarchyService'
 const { transferBalance } = require('../services/balanceService');
 
 const nextLevelUsers = async (req, res) => {
-  const users = await User.find({ parentId: req.auth.sub }).select('-passwordHash');
+  const users = await User.find({}).select('-passwordHash');
   res.json({ users });
 };
 
 const hierarchy = async (req, res) => {
   const target = req.params.userId;
-  const allowed = req.auth.role === 'OWNER' || (await isDescendant(req.auth.sub, target)) || req.auth.sub === target;
+  const allowed = req.auth.role === 'OWNER' || req.auth.role === 'ADMIN' || (await isDescendant(req.auth.sub, target)) || req.auth.sub === target;
   if (!allowed) return res.status(403).json({ message: 'Forbidden' });
 
   const tree = await getDownlineTree(target);
